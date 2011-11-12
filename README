@@ -3,3 +3,15 @@ see http://instagram-engineering.tumblr.com/post/12651721845/instagram-engineeri
 
 author: Max Brauer
 requires: PIL and NumPy
+
+The basic assumption is that when looking at pixel values they will unlikely
+change rapidly locally. Thats means that taking two neighboring pixels they
+values will be relatively close concerning euclidean distance in RGBA space.
+Even though it is safer to say that is very unlikely that the will be far apart.
+If so it would be evidence for an edge within the image. When looking at the
+scrambled columns it is very likely that those columns belong together which
+most outward pixels columns are closest together regarding euclidean distance.
+Thereby knowing the column width a picture might be unshreddered.
+
+The approach to column width detection does not always work. If it's not working
+reshredder the original image and try again.
