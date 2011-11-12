@@ -1,7 +1,7 @@
 from PIL import Image
 from random import shuffle
 
-SHREDS = 10
+SHREDS = 20
 image = Image.open('sample.png')
 shredded = Image.new('RGBA', image.size)
 width, height = image.size
