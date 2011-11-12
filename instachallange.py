@@ -10,6 +10,7 @@
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
+import os, sys
 
 def mostCommon(l):
 	"""
@@ -112,8 +113,11 @@ def match(column, othercolumns):
 
 if __name__ == '__main__':
 	# read the image
-	# shred = np.asarray(Image.open('./TokyoPanoramaShredded.png'))
-	shred = np.asarray(Image.open('./sample_shredded.png'))
+	imagepath = './sample_shredded.png'
+	if not os.path.exists(imagepath):
+		print 'please shredder first: "python shredder.py"'
+		sys.exit()
+	shred = np.asarray(Image.open(imagepath))
 	# determine the number of columns
 	cwidth = columnWidth(shred)
 	print 'estimated column width %s' % cwidth
@@ -128,9 +132,3 @@ if __name__ == '__main__':
 		columns = othercolumns
 	# save result
 	Image.fromarray(columns[0]).save('./result.png')
-
-	#x = map(np.sum, reduce(lambda x,y: x+y, shred.astype(float)))
-	#x = np.abs(np.diff(x))
-	#x /= np.max(np.abs(x),axis=0)
-	#x[x<.2]=0
-	#plt.scatter(x])
