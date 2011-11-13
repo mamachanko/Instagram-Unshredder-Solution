@@ -32,12 +32,19 @@ def columnWidth(shred):
 	# but until then simply return fixed 32
 	# return 32
 	#
-	# BONUS CHALLENGE
+	## BONUS CHALLENGE
+	# sum all row within the picture, leaving a 1d signal
 	x = map(np.sum, reduce(lambda x,y: x+y, shred.astype(float)))
+	# compute the first derivative
 	x = np.abs(np.diff(x))
+	# normalise
 	x /= np.max(np.abs(x),axis=0)
+	# threshold
 	x[x<.2]=0
+	# filter all nonzero elements and take there distances
+	# from to to another index-wise
 	x = np.diff(np.nonzero(x)[0])
+	# the most common distance should be the column width
 	return mostCommon(x)
 
 def findMatch(column, othercolumns, left):
